@@ -20,7 +20,11 @@ local SELECT_PROTO = {
 local ltask = require "ltask"
 
 function ltask.log(...)
-	ltask.pushlog(ltask.pack(...))
+	local info = debug.getinfo(2, "Sl")
+	local line = info.currentline
+	local file = info.source:sub(2)
+	local header = string.format("[%s:%d]", file, line)
+	ltask.pushlog(ltask.pack(header, ...))
 end
 
 ltask.log(string.format("${startup:%s}", ltask.label()))

@@ -82,7 +82,10 @@ local function writelog()
 		message = string.gsub(message, "%$%{([^}]*)%}", function (s)
 			return parse(id, s)
 		end)
-		io.write(string.format("[%s.%02d : %-10s]\t%s\n", os.date("%c", tsec), msec, querylabel(id), message))
+		local tb_time = os.date("*t", tsec)
+		local str_time = string.format("%02d-%02d %02d:%02d:%02d", 
+			tb_time.month, tb_time.day, tb_time.hour, tb_time.min, tb_time.sec)
+		io.write(string.format("[%s.%02d %s]\t%s\n", str_time, msec, querylabel(id), message))
 		flush = true
 	end
 	runtask()
