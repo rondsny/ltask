@@ -39,8 +39,8 @@ config_load(lua_State *L, int index, struct ltask_config *config) {
 	if (config->worker == 0) {
 		config->worker = ncores - 1;
 	}
-	if (config->worker > MAX_WORKER) {
-		config->worker = MAX_WORKER;
+	if (config->worker >= MAX_WORKER) {
+		config->worker = MAX_WORKER - 1;
 	}
 	config->queue = config_getint(L, index, "queue", DEFAULT_QUEUE);
 	config->queue = align_pow2(config->queue);
