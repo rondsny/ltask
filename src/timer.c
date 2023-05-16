@@ -33,8 +33,6 @@ struct timer {
 	uint32_t starttime;
 	uint64_t current;
 	uint64_t current_point;
-	timer_execute_func func;
-	void *ud;
 };
 
 static inline struct timer_node *
