@@ -18,9 +18,7 @@ function ltask.on_idle()
 	local now = ltask.walltime()
 	local delta = now - last
 	if delta > 0 then
-		for _ = 1, delta * 10 do
-			exclusive.timer_update(blocked)
-		end
+		exclusive.timer_update(blocked)
 		last = now
 	end
 	exclusive.sleep(10)
